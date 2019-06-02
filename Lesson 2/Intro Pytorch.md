@@ -2,6 +2,10 @@
 
 Deep Learning is based on artificial neural networks which have been around in some form since the late 1950s. The networks are built from individual parts approximating neurons, typically called units or simply "neurons." Each unit has some number of weighted inputs. These weighted inputs are summed together (a linear combination) then passed through an activation function to get the unit's output.
 
+**autograd** - to calculate gradients for training neural networks. Autograd, in my opinion, is amazing. It does all the work of backpropagation for you by calculating the gradients at each operation in the network which you can then use to update the network weights.
+
+**transfer learning** -  use pre-trained networks to improve the performance of your classifier
+
 **Tensors** - the main data structure of PyTorch. 
 - vector is an instance of a tensor
 1D tensor = row vector, 2D tensor = matrix.
@@ -25,3 +29,6 @@ Linear algebra matrix multiplication rule -
 `resize` - same memory but it can cut-off or add data if the number of elements is incorrect.
 
 `view` - same memory. changes the tensor shape only. throws error is number of elements is incorrect.
+
+
+## Multilayer Neural Networks
