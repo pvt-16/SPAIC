@@ -32,3 +32,16 @@ Linear algebra matrix multiplication rule -
 
 
 ## Multilayer Neural Networks
+ Individual units are stacked into layers and stacks of layers, into a network of neurons. The output of one layer of neurons becomes the input for the next layer. With multiple input units and output units, we now need to express the weights as a matrix.
+
+input layer -> hidden layers=>> output layer
+
+The number of hidden units a parameter of the network, often called a hyperparameter to differentiate it from the weights and biases parameters.
+
+## Numpy to Torch and back
+
+To create a tensor from a Numpy array, use `torch.from_numpy()`
+
+To convert a tensor to a Numpy array, use the `.numpy()` method.
+
+The memory is shared between the Numpy array and Torch tensor, so if you change the values in-place of one object, the other will change as well.
