@@ -22,4 +22,15 @@ Using **softmax** function - Normalizes values
 <img src="https://i.stack.imgur.com/iP8Du.png" alt="Softmax" style="float: left; margin-right: 10px;" />
  takes as input a vector of K real numbers, and normalizes it into a probability distribution consisting of K probabilities
  
-Used as `torch.nn.Softmax(dim=None)`
+Using pytorch nn module: `torch.nn.Softmax(dim=1)`
+
+OR it can be implemented as follows:
+
+`def softmax(x):
+    return torch.exp(x)/torch.sum(torch.exp(x), dim=1).view(-1,1)
+`
+
+torch.sum(torch.exp(x), dim=1) -> gives us a tensor that is a vector of 64 elements (in this case)
+Directly dividing will give a 64x64 tensor. Hence, We are reshaping it to give a 64x1 tensor.
+
+### Pytorch nn module
