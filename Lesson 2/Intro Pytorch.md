@@ -26,7 +26,7 @@ Linear algebra matrix multiplication rule -
   
 `reshape()` - can copy data into a clone and return the new Tensor - uses extra memory
 
-`resize` - same memory but it can cut-off or add data if the number of elements is incorrect.
+`resize_` - same memory but it can cut-off or add data if the number of elements is incorrect.
 
 `view` - same memory. changes the tensor shape only. throws error is number of elements is incorrect.
 
