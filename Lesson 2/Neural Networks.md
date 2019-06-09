@@ -54,3 +54,9 @@ In forward pass, the output is used to calculate the loss and adjust the weights
 Update our weights using this gradient with some learning rate 𝛼. 
 
 𝑊′1=𝑊1−𝛼 * ( ∂ℓ/ ∂𝑊1 )
+
+### Calculating losses in PyTorch
+
+helper module - Developed by Udacity
+
+Using nn.Sequential
