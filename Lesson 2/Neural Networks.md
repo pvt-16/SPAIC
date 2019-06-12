@@ -94,12 +94,10 @@ Create the Network. `model = Network_2_layers()`
 
 After creating the network, we initialize the weights and biases.
 
- Set biases to all zeros and sample from random normal with standard dev = 0.01
+Set biases to all zeros and sample from random normal with standard dev = 0.01. weights and bias customization - doing only for hidden layer 1 here
  
-`#weights and bias customization - doing only for hidden layer 1 here
-
-model.hidden_layer_1.bias.data.fill_(0)
-model.hidden_layer_1.weight.data.normal_(std=0.01)
+`model.hidden_layer_1.bias.data.fill_(0)
+ model.hidden_layer_1.weight.data.normal_(std=0.01)
 `
 
 Now, just pass an image and run the network.
