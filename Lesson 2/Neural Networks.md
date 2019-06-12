@@ -47,8 +47,8 @@ OR it can be implemented as follows:
 torch.sum(torch.exp(x), dim=1) -> gives us a tensor that is a vector of 64 elements (in this case)
 Directly dividing will give a 64x64 tensor. Hence, We are reshaping it to give a 64x1 tensor.
 
-### USing Pytorch nn module
-Let's rewrite the model using Pytorch nn module.
+### Using Pytorch nn module
+Let's redefine the model using Pytorch nn module.
 
 It is mandatory to inherit from `nn.Module` when you're creating a class for your network.
 
@@ -69,8 +69,12 @@ class Network(nn.Module):
         x = F.softmax(self.output(x), dim=1)
         
         return x
- `
- Here, we are using a new **sigmoid** activation function. 
+`
+In the code, we have, `self.hidden = nn.Linear(784, 256)`
+
+This line creates a module for a linear transformation, 𝑥𝐖+𝑏, with 784 inputs and 256 outputs and assigns it to self.hidden. The module automatically creates the weight and bias tensors. It is accessible after the network is created (as in, an object of the Network class is created)
+
+Here, we are using a new **sigmoid** activation function. 
 
 In general, any function can be used as an activation function. The only requirement is that for a network to approximate a non-linear function, the activation functions must be non-linear. 
 
@@ -79,14 +83,34 @@ Types of activation functions discussed
 2. Hyperbolic tangent
 3. Rectified Linear Unit (ReLU) - most exclusively used for hidden layers
 
-### Now we create a network with 1 hidden layer.
+#### Network with hidden layers
 
-Why hidden layer?
+Network class is re-written as Network_2_layers.
+Code at: https://github.com/pvt-16/SPAIC/blob/master/Lesson%202/nn_with_hidden_layer.py
+
+**Why hidden layer?**
+
+Create the Network. `model = Network_2_layers()`
+
+After creating the network, we initialize the weights and biases.
+
+`#weights and bias customization - doing only for hidden layer 1 here
+# Set biases to all zeros
+model.hidden_layer_1.bias.data.fill_(0)
+# sample from random normal with standard dev = 0.01
+model.hidden_layer_1.weight.data.normal_(std=0.01)
+`
+
+Now, just pass an image and run the network.
+
+Code at: 
+
+As you can see above, our network has basically no idea what this digit is. It's because we haven't trained it yet, all the weights are random!
 
 To measure how far our network's prediction is from the correct label, we use **loss function** 
 
-Loss depends on output. Output depends on weights (and bias). So the minimize loss, we must change weights.
-For the network to adjust weights, we use **Gradient descent**.
+Loss depends on output. Output depends on weights (and bias). So to minimize the loss, we must change weights.
+For the network to change/adjust weights, we use **Gradient descent**.
 Gradient is the slope of the loss function- points to the fastest descent.
 
 #### Backpropogation algorithm
