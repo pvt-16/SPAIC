@@ -9,15 +9,17 @@ Original file is located at
 
 import torch
 
+#activation function
 def activation(x):
   # sigmoid activation function
   return (1/ (1 + torch.exp(-x)))
 
 #generate fake data
-
 seed= torch.manual_seed(7)
-
+#features = input -> Use actual dataset IRL
 features = torch.randn((1,5))  #2-D tensor with 1 row and 5 columns
+
+#initial weights and biases of the network
 weights = torch.randn_like(features) #randn_like - to create a tensor with same dimensions
 bias = torch.randn([1,1])
 
@@ -36,6 +38,8 @@ mul_torchmm_output = torch.mm(features, weights.view(5,1))+ bias
 #print(mul_torchmm_output)
 
 final_output = activation(mul_torchmm_output)
+#The above 2 methods here constitute your 'network'
+
 print (final_output)
 
 #Multi layer
@@ -48,6 +52,7 @@ torch.manual_seed(7)
 features= torch.randn((1,3)) # 3 inputs
 print(features)
 number_input = features.shape[1] # returns number of columns. here it is 3.
+
 number_output = 1
 number_hidden =2
 
@@ -57,9 +62,12 @@ weights_layer2 = torch.randn(number_hidden, number_output)
 bias_1 = torch.randn((1,number_hidden))
 bias_2 = torch.randn((1,number_output))
 
+# your multi-layer network
 output_layer1 = (torch.mm(features, weights_layer1) + bias_1)
 output_1 = activation(output_layer1)
 output_layer2 = torch.mm(output_1, weights_layer2) + bias_2
 output_final = activation(output_layer2)
+#
+
 print(output_final)
 
