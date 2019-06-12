@@ -70,8 +70,10 @@ bias_2 = torch.randn((1,number_output)) #1x10
 output_layer_1= activation(torch.mm(flattened_images,weights_0_1)+ bias_1)
 output_layer_2= (torch.mm(output_layer_1, weights_1_2)+ bias_2)
 
-
+#Softmax activation function - defined in torch nn module
 softmax_function = torch.nn.Softmax(dim=1)
+
+#Softmax activation function- defined above
 output_softmax=softmax(output_layer_2)
 
 print(output_softmax.sum(dim=1))
