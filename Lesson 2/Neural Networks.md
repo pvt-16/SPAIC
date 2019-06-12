@@ -25,6 +25,10 @@ Our images in MNIST dataset are 28x28 => 2D tensors. We must convert them into 1
 
 `flattened_images= images.view(images.shape[0], -1)`
 
+After flattening, we pass the images through our model. Code at: https://github.com/pvt-16/SPAIC/blob/master/Lesson%202/neural_networks%20-%20basic.py
+
+WE have used softmax function in the code. Explaination below.
+
 ### Probability Distribution output
 
 Using **softmax** activation function - Normalizes values
@@ -34,7 +38,7 @@ Using **softmax** activation function - Normalizes values
  
 Using pytorch nn module: `torch.nn.Softmax(dim=1)`
 
-OR it can be implemented as follows:
+OR it can be implemented as follows: 
 
 `def softmax(x):
     return torch.exp(x)/torch.sum(torch.exp(x), dim=1).view(-1,1)
@@ -43,12 +47,41 @@ OR it can be implemented as follows:
 torch.sum(torch.exp(x), dim=1) -> gives us a tensor that is a vector of 64 elements (in this case)
 Directly dividing will give a 64x64 tensor. Hence, We are reshaping it to give a 64x1 tensor.
 
-### Pytorch nn module
+### USing Pytorch nn module
+Let's rewrite the model using Pytorch nn module.
 
-Types of activation functions
+It is mandatory to inherit from `nn.Module` when you're creating a class for your network.
+
+`import torch.nn.functional as F
+
+class Network(nn.Module):
+    def __init__(self):
+        super().__init__()
+        # Inputs to hidden layer linear transformation
+        self.hidden = nn.Linear(784, 256)
+        # Output layer, 10 units - one for each digit
+        self.output = nn.Linear(256, 10)
+        
+    def forward(self, x):
+        # Hidden layer with sigmoid activation
+        x = F.sigmoid(self.hidden(x))
+        # Output layer with softmax activation
+        x = F.softmax(self.output(x), dim=1)
+        
+        return x
+ `
+ Here, we are using a new **sigmoid** activation function. 
+
+In general, any function can be used as an activation function. The only requirement is that for a network to approximate a non-linear function, the activation functions must be non-linear. 
+
+Types of activation functions discussed
 1. sigmoid
 2. Hyperbolic tangent
-3. Rectified Linear Unit (ReLU)
+3. Rectified Linear Unit (ReLU) - most exclusively used for hidden layers
+
+### Now we create a network with 1 hidden layer.
+
+Why hidden layer?
 
 To measure how far our network's prediction is from the correct label, we use **loss function** 
 
