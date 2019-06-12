@@ -1,4 +1,9 @@
-## Identifying text in an image
+# Building Neural Networks
+
+## Example problem: Identifying text in an image
+**How?** 
+Given an image, out network must identify the number in the image. Range of the number can be 0-9.
+We do this by training our model on MNIST training data with images and labels. The output of the network will be a probability distribution. The label with the highest probability is the idenntified number.
 
 ### Using MNIST database
  Greyscale handwritten digits. Each image is 28x28 pixels
@@ -8,16 +13,21 @@
 `from torchvision import datasets` -> use this to download MNIST dataset
 
 After downloading the dataset, you need to load the training data.
-using torch, we load the data.
+using torch, we load the data into the variable trainloader.
 `trainloader = torch.utils.data.DataLoader(trainset, batch_size=64, shuffle=True)`
 
 Here, batch_size = 64 => 64 images will be loaded in one iteration from the data loader and passed through our network.
-
 And `shuffle=True` tells it to shuffle the dataset every time we start going through the data loader again.
+
+We are building a *fully-connected* or *dense networks*. Each unit in one layer is connected to each unit in the next layer. In fully-connected networks, the input to each layer must be a one-dimensional vector (which can be stacked into a 2D tensor as a batch of multiple examples).
+
+Our images in MNIST dataset are 28x28 => 2D tensors. We must convert them into 1D vectors by 'flattening'.
+
+`flattened_images= images.view(images.shape[0], -1)`
 
 ### Probability Distribution output
 
-Using **softmax** function - Normalizes values
+Using **softmax** activation function - Normalizes values
 
 <img src="https://i.stack.imgur.com/iP8Du.png" alt="Softmax" style="float: left; margin-right: 10px;" />
  takes as input a vector of K real numbers, and normalizes it into a probability distribution consisting of K probabilities
@@ -35,7 +45,7 @@ Directly dividing will give a 64x64 tensor. Hence, We are reshaping it to give a
 
 ### Pytorch nn module
 
-Types of activation function
+Types of activation functions
 1. sigmoid
 2. Hyperbolic tangent
 3. Rectified Linear Unit (ReLU)
@@ -60,3 +70,5 @@ Update our weights using this gradient with some learning rate 𝛼.
 helper module - Developed by Udacity
 
 Using nn.Sequential
+
+Using log-softmax function to calculate pr
