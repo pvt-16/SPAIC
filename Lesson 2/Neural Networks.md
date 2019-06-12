@@ -95,15 +95,19 @@ Create the Network. `model = Network_2_layers()`
 After creating the network, we initialize the weights and biases.
 
 `#weights and bias customization - doing only for hidden layer 1 here
-# Set biases to all zeros
+
+ #Set biases to all zeros
+
 model.hidden_layer_1.bias.data.fill_(0)
-# sample from random normal with standard dev = 0.01
+
+ #sample from random normal with standard dev = 0.01
+
 model.hidden_layer_1.weight.data.normal_(std=0.01)
 `
 
 Now, just pass an image and run the network.
 
-Code at: 
+Code at: https://github.com/pvt-16/SPAIC/blob/master/Lesson%202/nn_hidden_layer_forward_pass.py
 
 As you can see above, our network has basically no idea what this digit is. It's because we haven't trained it yet, all the weights are random!
 
