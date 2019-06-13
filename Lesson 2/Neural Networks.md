@@ -100,22 +100,24 @@ Set biases to all zeros and sample from random normal with standard dev = 0.01. 
  model.hidden_layer_1.weight.data.normal_(std=0.01)
 `
 
-Now, just pass an image and run the network.
+Here we are adding a helper module- method name view_classify - Developed by Udacity
+
+Now, just pass an image and run the network. This is the *forward pass*.
 
 Code at: https://github.com/pvt-16/SPAIC/blob/master/Lesson%202/nn_hidden_layer_forward_pass.py
 
 As you can see above, our network has basically no idea what this digit is. It's because we haven't trained it yet, all the weights are random!
 
-To measure how far our network's prediction is from the correct label, we use **loss function** 
+There is a gap between the correct labels and the 'predicted' label above. To measure how far our network's prediction is from the correct label, we use **loss function** 
 
+### Loss
 Loss depends on output. Output depends on weights (and bias). So to minimize the loss, we must change weights.
 For the network to change/adjust weights, we use **Gradient descent**.
 Gradient is the slope of the loss function- points to the fastest descent.
 
-#### Backpropogation algorithm
-Chain of changes.
+Algorithm for calculation loss: **Backpropogation algorithm**
 
-In forward pass, the output is used to calculate the loss and adjust the weights. The input is passed through the network again to see an output with lesser loss. In backward pass, after we get the output, we get the derivatives for the functions. As we propogate backwards, we multiply the incoming gradient with the function's gradient and so on until we reach the initial weights. Here, we can calculate the gradient of loss w.r.t. the weights. Subtract the gradient and start process again.
+This algo is basically a chain of changes. In forward pass, the output is used to calculate the loss and adjust the weights. The input is passed through the network again to see an output with lesser loss. In *backward pass*, after we get the output, we get the derivatives for the functions. As we propogate backwards, we multiply the incoming gradient with the function's gradient and so on until we reach the initial weights. Here, we can calculate the gradient of loss w.r.t. the weights. Subtract the gradient and start process again. 
 
 Update our weights using this gradient with some learning rate 𝛼. 
 
@@ -123,8 +125,19 @@ Update our weights using this gradient with some learning rate 𝛼.
 
 ### Calculating losses in PyTorch
 
-helper module - Developed by Udacity
+The nn module has methods for calculating losses. 
 
-Using nn.Sequential
+1. Cross-entropy loss - `nn.CrossEntropyLoss`
+  - Classification problems.
+  
+Typically, we assign loss function to variable `criterion`. 
+Inputs to the loss function is the same as inputs to the softmax function. These inputs are supposed to be the scores for each class; not probabilities, i.e, the results from our model. They are called *logits*.
+
+**Logits** - The vector of raw (non-normalized) predictions that a classification model generates, which is ordinarily then passed to a normalization function. If the model is solving a multi-class classification problem, logits typically become an input to the softmax function. The softmax function then generates a vector of (normalized) probabilities with one value for each possible class.
+
+Hence, we don't need to define a softmax function separetely. The criterion (loss function defined in pytorch and assigned here to this) combines loss function and softmax function.
+
+Code at:
+PS: In code, we are re-writing the model using **nn.Sequential**
 
 Using log-softmax function to calculate pr
