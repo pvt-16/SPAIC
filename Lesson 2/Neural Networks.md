@@ -155,3 +155,6 @@ Since our network passes the inputs through softmax function, the output is not 
 
 ### Using losses to perform backpropogation
 
+#### Autograd module in pytoch
+
+Autograd module automatically calculates gradients of tensors.
