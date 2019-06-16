@@ -21,6 +21,8 @@ And `shuffle=True` tells it to shuffle the dataset every time we start going thr
 
 We are building a *fully-connected* or *dense networks*. Each unit in one layer is connected to each unit in the next layer. In fully-connected networks, the input to each layer must be a one-dimensional vector (which can be stacked into a 2D tensor as a batch of multiple examples).
 
+### Preparing images for network
+
 Our images in MNIST dataset are 28x28 => 2D tensors. We must convert them into 1D vectors by 'flattening'.
 
 `flattened_images= images.view(images.shape[0], -1)`
@@ -29,7 +31,7 @@ After flattening, we pass the images through our model. Code at: https://github.
 
 WE have used softmax function in the code. Explaination below.
 
-### Probability Distribution output
+### Output- Probability Distribution output
 
 Using **softmax** activation function - Normalizes values
 
@@ -76,6 +78,8 @@ This line creates a module for a linear transformation, 𝑥𝐖+𝑏, with 784 
 
 Here, we are using a new **sigmoid** activation function. 
 
+### Activation functions
+
 In general, any function can be used as an activation function. The only requirement is that for a network to approximate a non-linear function, the activation functions must be non-linear. 
 
 Types of activation functions discussed
@@ -83,7 +87,7 @@ Types of activation functions discussed
 2. Hyperbolic tangent
 3. Rectified Linear Unit (ReLU) - most exclusively used for hidden layers
 
-#### Network with hidden layers
+### Network with hidden layers
 
 Network class is re-written as Network_2_layers.
 Code at: https://github.com/pvt-16/SPAIC/blob/master/Lesson%202/nn_with_hidden_layer.py
@@ -101,6 +105,8 @@ Set biases to all zeros and sample from random normal with standard dev = 0.01. 
 `
 
 Here we are adding a helper module- method name view_classify - Developed by Udacity
+
+### Forward pass - getting output with image inputs
 
 Now, just pass an image and run the network. This is the *forward pass*.
 
@@ -120,7 +126,6 @@ Algorithm for calculation loss: **Backpropogation algorithm**
 This algo is basically a chain of changes. In forward pass, the output is used to calculate the loss and adjust the weights. The input is passed through the network again to see an output with lesser loss. In *backward pass*, after we get the output, we get the derivatives for the functions. As we propogate backwards, we multiply the incoming gradient with the function's gradient and so on until we reach the initial weights. Here, we can calculate the gradient of loss w.r.t. the weights. Subtract the gradient and start process again. 
 
 Update our weights using this gradient with some learning rate 𝛼. 
-
 𝑊′1=𝑊1−𝛼 * ( ∂ℓ/ ∂𝑊1 )
 
 ### Calculating losses in PyTorch
@@ -129,6 +134,8 @@ The nn module has methods for calculating losses.
 
 1. Cross-entropy loss - `nn.CrossEntropyLoss`
   - Classification problems.
+ 
+Loss functions take 2 parameters - model outputs (logits) and correct labels
   
 Typically, we assign loss function to variable `criterion`. 
 Inputs to the loss function is the same as inputs to the softmax function. These inputs are supposed to be the scores for each class; not probabilities, i.e, the results from our model. They are called *logits*.
@@ -137,7 +144,39 @@ Inputs to the loss function is the same as inputs to the softmax function. These
 
 Hence, we don't need to define a softmax function separetely. The criterion (loss function defined in pytorch and assigned here to this) combines loss function and softmax function.
 
-Code at:
+Code at: https://github.com/pvt-16/SPAIC/blob/master/Lesson%202/nn_hl_forwardpass_withloss.py
 PS: In code, we are re-writing the model using **nn.Sequential**
 
-Using log-softmax function to calculate pr
+Throguh experince it is realised that, we should use log-softmax function (`nn.LogSoftmax` or `nn.functional.log_softmax`) instead of normal softmax to calculate outputs. Then we can get the probabilities by taking out the exponential using `torch.exp(output)`.
+
+Since our network passes the inputs through softmax function, the output is not logits but probabilities itself. Hence, we will use a different loss function -
+
+2. Negative log likelihood loss.  - `nn.NLLLoss`
+
+### Using losses to perform backpropogation
+
+#### Autograd module in pytoch
+
+Autograd module automatically calculates gradients of tensors. It keeps a track of all the operations performed on the tensors and we can use this to perform backpropogation and calculate gradients wrt to the loss. 
+To use autograd on a specific tensor,  set `requires_grad = True` on a tensor. 
+
+Turn off gradients for a block of code with the `with torch.no_grad() `
+
+Turn on or off gradients altogether with `torch.set_grad_enabled(True|False).` on the tensor.
+
+`z.backward()` - The gradients are computed automatically with this method. It is wrt the output of the operation. This does a backward pass through the operations that created `z`. (actions performed on a tensor `y` that create another tensor variable) `z`.
+
+`z.grad` -  attribute that holds the gradient for this tensor.
+
+`z.grad_fn` - To see the operations performed. Each tensor has a `.grad_fn` attribute that references a Function that has created the Tensor.
+
+Autograd: https://pytorch.org/docs/stable/autograd.html
+
+Calculating gradients formula:  ∂𝑧∂𝑥=∂∂𝑥[1𝑛∑𝑖𝑛𝑥2𝑖]=𝑥2
+
+
+
+
+#### Using Autograd with our losses
+
+Code at: 
