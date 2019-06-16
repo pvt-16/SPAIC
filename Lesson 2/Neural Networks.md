@@ -174,9 +174,5 @@ Autograd: https://pytorch.org/docs/stable/autograd.html
 
 Calculating gradients formula:  ∂𝑧∂𝑥=∂∂𝑥[1𝑛∑𝑖𝑛𝑥2𝑖]=𝑥2
 
-
-
-
-#### Using Autograd with our losses
-
-Code at: 
+Using Autograd with our losses.
+Code at: https://github.com/pvt-16/SPAIC/blob/master/Lesson%202/nn_hl_fp_loss_autograd.py
