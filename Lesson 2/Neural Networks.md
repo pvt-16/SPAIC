@@ -157,4 +157,17 @@ Since our network passes the inputs through softmax function, the output is not 
 
 #### Autograd module in pytoch
 
-Autograd module automatically calculates gradients of tensors.
+Autograd module automatically calculates gradients of tensors. It keeps a track of all the operations performed on the tensors and we can use this to perform backpropogation and calculate gradients wrt to the loss. 
+To use autograd on a specific tensor,  set `requires_grad = True` on a tensor. 
+
+Turn off gradients for a block of code with the `with torch.no_grad() `
+
+Turn on or off gradients altogether with `torch.set_grad_enabled(True|False).` on the tensor.
+
+`z.backward()` - The gradients are computed automatically with this method. It is wrt the output of the operation. This does a backward pass through the operations that created `z`. (actions performed on a tensor `y` that create another tensor variable) `z`.
+
+`z.grad` -  attribute that holds the gradient for this tensor.
+
+`z.grad_fn` - To see the operations performed. Each tensor has a `.grad_fn` attribute that references a Function that has created the Tensor.
+
+Autograd: https://pytorch.org/docs/stable/autograd.html
