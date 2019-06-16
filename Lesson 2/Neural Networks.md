@@ -171,3 +171,12 @@ Turn on or off gradients altogether with `torch.set_grad_enabled(True|False).` o
 `z.grad_fn` - To see the operations performed. Each tensor has a `.grad_fn` attribute that references a Function that has created the Tensor.
 
 Autograd: https://pytorch.org/docs/stable/autograd.html
+
+Calculating gradients formula:  ∂𝑧∂𝑥=∂∂𝑥[1𝑛∑𝑖𝑛𝑥2𝑖]=𝑥2
+
+
+
+
+#### Using Autograd with our losses
+
+Code at: 
