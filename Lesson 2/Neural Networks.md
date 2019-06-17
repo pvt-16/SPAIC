@@ -176,3 +176,15 @@ Calculating gradients formula:  ∂𝑧∂𝑥=∂∂𝑥[1𝑛∑𝑖𝑛𝑥2�
 
 Using Autograd with our losses.
 Code at: https://github.com/pvt-16/SPAIC/blob/master/Lesson%202/nn_hl_fp_loss_autograd.py
+
+
+Using gradients to update weights - **Optimizers**
+
+### PyTorch - Optim package
+
+Here we are using Stochastic Gradient Descent with `optim.SGD`
+
+Initializing - `optimizer = optim.SGD(model.parameters(), lr=0.01)`
+
+-> When you do multiple backwards passes with the same parameters, the gradients are accumulated. This means that you need to reset the gradients on each training pass or you'll retain gradients from previous training batches. If old gradients are retained, the network won't be trained correctly. Use  `optimizer.zero_grad()`
+
