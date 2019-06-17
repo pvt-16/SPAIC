@@ -7,7 +7,6 @@
 ## Training the network
 Put the algorithm into a loop. one pass through the entire dataset is called an _epoch_
 
-
 ## MNIST- Fashion Dataset
 
 Build a similar model to the MNIST dataset (Numbers) for classification of clothes.
@@ -20,6 +19,7 @@ Build a similar model to the MNIST dataset (Numbers) for classification of cloth
 
 Code at: https://github.com/pvt-16/SPAIC/blob/master/Lesson%202/fashion_mnist.py
 
+
 In case you want to test the model against the data and measure the accuracy of the model, download and load test data with:
 
 `testset = datasets.FashionMNIST('~/.pytorch/Fashion-MNIST_data/', download=True, train=False, transform=transform)`
@@ -28,3 +28,5 @@ In case you want to test the model against the data and measure the accuracy of 
 
 And using the test data set with:
 https://gist.github.com/pvt-16/14ccfedc662d8cefd29b19ec758d6e5d
+
+Source: https://medium.com/ml2vec/intro-to-pytorch-with-image-classification-on-a-fashion-clothes-dataset-e589682df0c5
