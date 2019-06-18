@@ -30,3 +30,9 @@ And using the test data set with:
 https://gist.github.com/pvt-16/14ccfedc662d8cefd29b19ec758d6e5d
 
 Source: https://medium.com/ml2vec/intro-to-pytorch-with-image-classification-on-a-fashion-clothes-dataset-e589682df0c5
+
+### Optimizer 
+For this network, we are using Adam optimizer.
+List of optimizers available in PyTorch: https://pytorch.org/docs/stable/optim.html
+
+PS: List of loss functions in PyTorch: https://pytorch.org/docs/stable/nn.html#loss-functions
