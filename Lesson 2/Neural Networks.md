@@ -3,7 +3,7 @@
 ## Example problem: Identifying text in an image
 **How?** 
 Given an image, out network must identify the number in the image. Range of the number can be 0-9.
-We do this by training our model on MNIST training data with images and labels. The output of the network will be a probability distribution. The label with the highest probability is the idenntified number.
+We do this by training our model on MNIST training data with images and labels. The output of the network will be a probability distribution. The label with the highest probability is the identified number.
 
 ### Using MNIST database
  Greyscale handwritten digits. Each image is 28x28 pixels
