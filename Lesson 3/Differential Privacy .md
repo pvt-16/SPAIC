@@ -26,9 +26,12 @@ Canonical data models are a type of data model that aims to present data entitie
 If the query doesn't change even we remove someone from the database, then that person wasn't leaking any statistical information into the output of the query.
 
 Let's first create a set of databases with one entry removed in each database.
-Eg:If DB = [1,0,0,1,0,1...0,1]
+Eg: If `DB = [1,0,0,1,0,1...0,1]`
+
     DB_1 = [0,0,1,0,1...0,1]  (Removed entry at 1st place '1')
+
     DB_2 = [1,0,1,0,1...0,1]  (Removed entry at 2nd place '0')
+    
     and so on..
     
     
