@@ -35,3 +35,7 @@ Eg: If `DB = [1,0,0,1,0,1...0,1]`
     and so on..
     
     
+Code at: https://github.com/pvt-16/SPAIC/blob/master/Lesson%203/canonical_database.py
+
+Here we are creating a database with 'n' entries. With this database, we create multiple parallel databases with one entry removed from the original database. We will use this in the next lesson. 
+    
